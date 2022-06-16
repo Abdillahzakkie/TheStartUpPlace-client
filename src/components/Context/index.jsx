@@ -11,7 +11,6 @@ class Web3Provider extends Component {
 
 		this.state = {
 			loading: true,
-			modalState: true,
 			web3: null,
 			user: null,
 			provider: null,
@@ -22,8 +21,6 @@ class Web3Provider extends Component {
 
 	async componentDidMount() {
 		this.setState({
-			loading: true,
-			modalState: false,
 			BASE_URL: "https://zoopr-backend.herokuapp.com/api",
 		});
 
@@ -34,15 +31,16 @@ class Web3Provider extends Component {
 		try {
 			const _chainId = 4;
 			const provider = window.ethereum;
+			provider.enable();
 
-			await this._connectWeb3(provider, _chainId);
+			await this.connectWeb3(provider, _chainId);
 			await this.loadBlockchainData();
 		} catch (error) {
 			return error;
 		}
 	};
 
-	_connectWeb3 = async (provider, chainId) => {
+	connectWeb3 = async (provider, chainId) => {
 		try {
 			const web3 = new Web3(provider);
 			if (chainId !== (await web3.eth.getChainId())) {
@@ -53,7 +51,7 @@ class Web3Provider extends Component {
 			}
 			// checks if chainId was successfully switched
 			if ((await web3.eth.getChainId()) !== chainId) {
-				return;
+				return alert("Please switch wallet to Rinkeby Testnet");
 			}
 
 			const _accounts = await web3.eth.getAccounts();

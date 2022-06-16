@@ -10,4 +10,4 @@ COPY --from=0 /src/ .
 EXPOSE 8080
 ENV NODE_ENV production
 
-CMD yarn start
+CMD ["yarn", "start"]

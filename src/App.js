@@ -10,15 +10,13 @@ require("dotenv/config");
 // const ethereum = window.ethereum;
 
 const App = () => {
-	const { loading, web3, updateAccount, reRender, provider } =
+	const { loading, updateAccount, provider, connectDapp } =
 		useContext(web3Context);
 	useEffect(() => {
 		if (loading) return;
-		provider.on("accountsChanged", async (_accounts) =>
-			updateAccount(_accounts[0])
-		);
+		provider.on("accountsChanged", async (_accounts) => await connectDapp());
 		provider.on("chainChanged", () => window.location.reload());
-	}, [loading, web3, provider, updateAccount, reRender]);
+	}, [loading, provider, updateAccount, connectDapp]);
 
 	return (
 		<div className="grid">

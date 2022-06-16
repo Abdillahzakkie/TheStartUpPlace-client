@@ -3,3 +3,4 @@ node_modules
 config.txt
 heroku_deploy.sh
 build
+compose.yaml
