@@ -7,9 +7,7 @@
 		"dev": "react-scripts start",
 		"build": "react-scripts build",
 		"test": "react-scripts test",
-		"eject": "react-scripts eject",
-		"build:css": "postcss src/styles/tailwind.css -o src/styles/main.css",
-		"build:watch": "postcss src/styles/tailwind.css -o src/styles/main.css --watch"
+		"eject": "react-scripts eject"
 	},
 	"dependencies": {
 		"@testing-library/jest-dom": "^5.11.4",

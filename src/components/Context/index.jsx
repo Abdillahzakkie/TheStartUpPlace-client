@@ -15,15 +15,14 @@ class Web3Provider extends Component {
 			user: null,
 			provider: null,
 			balance: 0,
+			// note this endpoint was designed by me to query and ethereum address data
+			// Here is a documentation of the endpoint: https://documenter.getpostman.com/view/13796786/UVkntGTB
+			BASE_URL: "https://zoopr-backend.herokuapp.com/api",
 			transactionHistory: [],
 		};
 	}
 
 	async componentDidMount() {
-		this.setState({
-			BASE_URL: "https://zoopr-backend.herokuapp.com/api",
-		});
-
 		await this.connectDapp();
 	}
 
@@ -56,12 +55,16 @@ class Web3Provider extends Component {
 
 			const _accounts = await web3.eth.getAccounts();
 			const user = web3.utils.toChecksumAddress(_accounts[0]);
+			const _accountBalance = web3.utils.fromWei(
+				await web3.eth.getBalance(user)
+			);
 
 			this.setState({
 				loading: false,
 				web3,
 				user,
 				provider,
+				balance: _accountBalance,
 			});
 		} catch (error) {
 			return error;
@@ -69,12 +72,10 @@ class Web3Provider extends Component {
 	};
 
 	// load blockchain data
-	loadBlockchainData = async ({ web3, user } = this.state) => {
+	loadBlockchainData = async ({ user } = this.state) => {
 		try {
-			const _accountBalance = this.fromWei(await web3.eth.getBalance(user));
 			const _accountERC20Holdings = await this.getAccountERC20Holdings(user);
 			this.setState({
-				balance: _accountBalance,
 				transactionHistory: _accountERC20Holdings,
 			});
 		} catch (error) {

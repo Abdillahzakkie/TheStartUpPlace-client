@@ -38,7 +38,11 @@ function ERC20Holdings() {
 				<p className="grid card balance">Balance</p>
 				<p className="grid card contract">Contract</p>
 			</header>
-			{erc20HoldingsData}
+			{erc20HoldingsData.length > 0 ? (
+				erc20HoldingsData
+			) : (
+				<h3>Account has no ERC20 tokens...</h3>
+			)}
 		</ERC20HoldingsWrapper>
 	);
 }
