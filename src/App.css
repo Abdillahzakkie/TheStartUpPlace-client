@@ -1,0 +1,48 @@
+*,
+::before,
+::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+:root {
+	--light: #f1f5f8;
+	--dark: #333;
+	--white: #fff;
+	--grey: #333333;
+	--transition: all 1s ease-in-out;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+body {
+	overflow-x: hidden;
+}
+
+button {
+	cursor: pointer;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto;
+	margin: 0 auto;
+}
+
+::-webkit-scrollbar {
+	width: 0.4vw;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #212121;
+	border-radius: 2em;
+}
+
+::-webkit-scrollbar-track {
+	background: #dcdfe1;
+}
